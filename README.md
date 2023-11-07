@@ -1,8 +1,22 @@
-# Getting Remote Data Lab 
+# Getting Remote Data Lab
 
 ## Learning Goals
 
-- Learning goal 1.
+- Practice sending GET requests using Python.
+- Build a reusable class for sending requests and handling responses.
+
+---
+
+## Introduction
+
+It is time to practice building out your own class for retrieving remote data.
+In this lab, you are tasked with building a generic `GetRequester` class. This
+class will be able to take in a URL on initialization and send an HTTP GET
+request on command. You will also need to build a method for dealing with
+requests that return JSON.
+
+When complete, you will have a simple, but versatile class for getting
+information from all kinds of sources over the internet.
 
 ---
 
@@ -17,48 +31,63 @@ environment.
 $ pipenv install && pipenv shell
 ```
 
-Change into the `server` directory, where you will run the application and
-tests:
+Follow the instructions below. Run `pytest -x` to run your tests. Use these
+instructions and `pytest`'s error messages to complete your work in the `lib/`
+folder.
 
-```console
-$ cd server
-```
+## Instructions
 
-You can run the application as a script within the `server/` directory:
+All work should be completed in `lib/GetRequester.py`. Use the previous lessons
+on getting data from APIs as a reference when building out your class.
 
-```console
-$ python app.py
-```
+Start by creating a `GetRequester` class. Each class instance should be
+initialized with a string URL.
 
-If you prefer working in a Flask environment, remember to configure it with the
-following commands within the `server/` directory:
+The `GetRequester` class should have a `get_response_body` method that sends a
+GET request to the URL passed in on initialization. This method should return
+the _body_ of the response.
 
-```console
-$ export FLASK_APP=app.py
-$ export FLASK_RUN_PORT=5555
-$ flask run
-```
+The `GetRequester` class should have a `load_json` method that should use
+`get_response_body` to send a request, then return a Python list or dictionary
+made up of data converted from the response of that request.
 
-Run `pytest -x` to run your tests:
+The tests in this lab will use your code to send a request for some JSON data,
+located at
+[https://learn-co-curriculum.github.io/json-site-example/endpoints/people.json][].
 
-```console
-$ pytest -x
-```
+Read the test error messages for additional as you work for additional
+information. Don't forget to import the necessary Python modules and classes!
 
-Use these instructions and `pytest`'s error messages to complete your work.
-
-Lab Requirements:
-
-- Implement a Flask application with the following views.
+[https://learn-co-curriculum.github.io/json-site-example/endpoints/people.json]:
+  https://learn-co-curriculum.github.io/json-site-example/endpoints/people.json
 
 Once all of your tests are passing, commit and push your work using `git` to
 submit.
 
 ---
 
+## Conclusion
+
+Once you've successfully passed the tests, from this lesson's directory, you
+should be able to open repl, use `lib/GetRequester.py`, and send out some
+requests!
+
+```py
+get_requester = GetRequester('https://learn-co-curriculum.github.io/json-site-example/endpoints/people.json')
+get_requester.load_json()
+#=> [{"name"=>"Daniel", "occupation"=>"LG Fridge Salesman"}, {"name"=>"Joe", "occupation"=>"WiFi Fixer"}, {"name"=>"Avi", "occupation"=>"DJ"}, {"name"=>"Howard", "occupation"=>"Mountain Legend"}]
+```
+
+This class won't work for all cases but is a good starting place to get us off
+the ground. We can now augment our applications with data from the internet!
+Combined with our knowledge of Python, we have all the tools we need to start
+building smarter Python applications populated with real data.
+
+---
+
 ## Resources
 
-- [Resource 1](https://www.python.org/doc/essays/blurb/)
-- [Reused Resource][reused resource]
-
-[reused resource]: https://docs.python.org/3/
+- [GET - Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET)
+- [HTTP methods - Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+- [requests](https://requests.readthedocs.io/en/latest/)
+- [Python JSON](https://docs.python.org/3/library/json.html)
