@@ -1,4 +1,4 @@
-# Getting Remote Data Lab
+# Getting Remote Data Lab (Optional)
 
 ## Learning Goals
 
